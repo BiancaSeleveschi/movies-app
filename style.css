@@ -1,0 +1,17 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.custom-col {
+    height: 100px;
+    width: 100px;
+    background: var(--bs-blue);
+    border: 2px black solid;
+}
+
+main {
+    background: var(--bs-orange);;
+    height: 100%;
+}
