@@ -12,6 +12,14 @@ footer {
 }
 
 main {
-    background: var(--bs-orange);;
+    background: var(--bs-orange);
     height: 100%;
+}
+
+html {
+    background: var(--bs-orange);
+}
+
+.movie-div:hover {
+    transform: scale(1.1);
 }
