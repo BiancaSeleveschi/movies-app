@@ -398,59 +398,59 @@
   "genres": [
     {
       "id": 28,
-      "name": "action"
+      "name": "Action"
     },
     {
       "id": 12,
-      "name": "adventure"
+      "name": "Adventure"
     },
     {
       "id": 16,
-      "name": "animation"
+      "name": "Animation"
     },
     {
       "id": 35,
-      "name": "comedy"
+      "name": "Comedy"
     },
     {
       "id": 80,
-      "name": "crime"
+      "name": "Crime"
     },
     {
       "id": 18,
-      "name": "drama"
+      "name": "Drama"
     },
     {
       "id": 10751,
-      "name": "family"
+      "name": "Family"
     },
     {
       "id": 14,
-      "name": "fantasy"
+      "name": "Fantasy"
     },
     {
       "id": 36,
-      "name": "history"
+      "name": "History"
     },
     {
       "id": 27,
-      "name": "horror"
+      "name": "Horror"
     },
     {
       "id": 10402,
-      "name": "music"
+      "name": "Music"
     },
     {
       "id": 10749,
-      "name": "romance"
+      "name": "Romance"
     },
     {
       "id": 878,
-      "name": "science fiction"
+      "name": "Science fiction"
     },
     {
       "id": 53,
-      "name": "thriller"
+      "name": "Thriller"
     }
   ]
 }

@@ -2,27 +2,16 @@ $.getJSON("movies.json", loadMovieData)
 
 function loadMovieData(data) {
 
-    console.log("ina interiorul functieri)")
-    console.log("data from json", data)
     let movies = data.movies;
     let genres = data.genres;
-    console.log("genres", genres)
-    console.table(movies)
-    displayMovies(movies) //parametri actuali
-    displayAllGenreInDropdown()
+    displayMovies(movies)
+    displayAGenresInDropdown()
     $("#movieModal").on("show.bs.modal", updateMovieModal)
-    $("#search-button").click(getMovieWroteInInput) //scurtatura de jquery pt linia de jos
-    // $("#search-button").on("click",getMovieWroteInInput)
-
+    $("#search-button").click(searchMovie)
     let favoriteMovie = [];
 
-    //Tema: afisarea tuturor genurilor in Lista de genuri din navbar (toate genurile care exista, in json, adiica in array-ul genres)
-    //pentru fiecare element de gen afisat in dropdown, la apasarea lui sa se afiseze filmele genului apsata
-    //asta inseamna ca la fiecare li ....data-genre.....
-    //functionalitate:  afisarea tuturor genurilor in dropdown si
-    function displayAllGenreInDropdown() {
+    function displayAGenresInDropdown() {
         for (let i = 0; i < genres.length; i++) {
-
             let a = $('<a class="dropdown-item"  href="#" ></a>').text(genres[i].name)
             a.attr("data-genre", genres[i].id)
             let li = $('<li></li>')
@@ -31,9 +20,7 @@ function loadMovieData(data) {
         }
     }
 
-    // pentru fiecare gen la apasarea lui sa imi afiseze filmele cu genul respectiv
-
-    function displayMovies(movies) { //parametri formali
+    function displayMovies(movies) {
         for (let i = 0; i < movies.length; i++) {
             insertMovie(movies[i])
         }
@@ -49,51 +36,6 @@ function loadMovieData(data) {
         $("#movies-div").append(div)
     }
 
-    function getMovieWroteInInput(event) {
-        event.preventDefault()
-        $("#movies-div").empty()
-        let searchInput = $("#search-input").val();
-        for (let i = 0; i < movies.length; i++) {
-            if (movies[i].title === searchInput) {
-                insertMovie(movies[i])
-            }
-        }
-    }
-
-    ///Funtionalitate buton bookmark
-    //LA apasarea butonului vreau sa se umple iconita si adaugam filmul in lista de filme favorite = array
-    //1 la apsaraea butonului sa se adauge filmul in array
-    //adaugam event listener pe butonul e bookmark care la apasarea lui sa se efectueze actiunea de a marca filmul ca favorit (Adica il adauga in arrayul de favorit)
-    $("#bookmark-button").click(markFavorite);
-    //$("#bookmark-button").click(markNonFavorite);
-
-    //creeam functia markfavorit care adauga filmul pe care s-a abasat buton ul de bookmark din modal, in array-ul de favorites
-    function markFavorite() {
-        //1. extragemn id-ul filmului pe care s-a apasat butnolu de bookmark din modal
-        let movieId = $("#bookmark-button").attr('data-bs-movie');
-        //2. gasim filmul dupa id
-        let movie = getMovieById(movieId);
-        //3. adaugam filmul la favorite
-        favoriteMovie.push(movie);
-        $("#bookmark-button i").removeClass("bi-bookmark")
-        $("#bookmark-button i").addClass("bi-bookmark-fill")
-        //wayne dyer -piuterea intentiei
-
-        //daca filmul nu e favorit si apasam pe butonul bookmark adaugam filmul la favorite si facem bookmarkul plin
-        //iar daca filmul e favorit si apasam pe butonul de bookmark vrem sa facem bookmarkul gol si sa stergem din array-ul de favorite filmul
-    }
-
-    function markNonFavorite() {
-        let movieId = $("#bookmark-button").attr('data-bs-movie');
-        let movie = getMovieById(movieId);
-        if (verifyIfMovieIsFavorite(movie)) {
-            $("#bookmark-button i").removeClass("bi-bookmark-fill")
-            $("#bookmark-button i").addClass("bi-bookmark")
-            favoriteMovie.remove(movie)
-        }
-    }
-
-
     function updateMovieModal(event) {
         const movieButton = event.relatedTarget //butonul pe care am apasat sa se deschida modalul = butonul filmului
         const movieId = movieButton.getAttribute('data-bs-movie'); //luam valoarea atriobutului data-bs-movie = avem id-ul filmului
@@ -104,35 +46,13 @@ function loadMovieData(data) {
         $("#rating-span").text(movie.vote_average)
         $("#bookmark-button").attr('data-bs-movie', movieId)
         //daca filmul este favorti (Adica se afla in array-ul de favorite) se afiseaza burtonul plin altfel butonul gol
-        if (verifyIfMovieIsFavorite(movie)) {
+        if (isFavorite(movie)) {
             $("#bookmark-button i").addClass("bi-bookmark-fill")
         } else {
             $("#bookmark-button i").addClass("bi-bookmark")
         }
-
         $("#img-id").attr('src', movie.poster_path)
     }
-
-    function verifyIfMovieIsFavorite(movie) {
-        for (let i = 0; i < favoriteMovie.length; i++) {
-            if (movie.id === favoriteMovie[i].id) {
-                return true
-            }
-        }
-        return false;
-    }
-
-    e
-
-    function getMovieById(movieId) {
-        for (let i = 0; i < movies.length; i++) {
-            if (movies[i].id === parseInt(movieId)) {
-                return movies[i]
-            }
-        }
-    }
-
-    $(".dropdown-item").click(displayMoviesByGenre);
 
     function displayMoviesByGenre(event) {
         const li = event.target
@@ -146,11 +66,63 @@ function loadMovieData(data) {
             }
         }
     }
+
+    function searchMovie(event) {
+        event.preventDefault()
+        $("#movies-div").empty()
+        let value = $("#search-input").val();
+        for (let i = 0; i < movies.length; i++) {
+            if (movies[i].title.toLowerCase().includes(value.toLowerCase())) {
+                insertMovie((movies[i]))
+            }
+        }
+    }
+
+
+    $("#bookmark-button").click(markFavorite);
+
+    // $("#bookmark-button").click(markNonFavorite);
+    let movieIsFavorite = false;
+
+    function markFavorite() {
+        //1. extragemn id-ul filmului pe care s-a apasat butnolu de bookmark din modal
+        let movieId = $("#bookmark-button").attr('data-bs-movie');
+        //2. gasim filmul dupa id
+        let movie = getMovieById(movieId);
+        //3. adaugam filmul la favorite
+        $("#bookmark-button i").addClass("bi-bookmark")
+        $("#bookmark-button i").removeClassz("bi-bookmark-fill")
+        favoriteMovie.push(movie);
+    }
+
+    function displayFavoriteMovies() {
+        for (let i = 0; i < movies.length; i++) {
+            markFavorite(movies[i])
+        }
+    }
+
+    $("#favorite-movies").click(markFavorite)
+    $(".moviesss").click(displayMovies)
+
+    function isFavorite() {
+        let movieId = $("#bookmark-button").attr('data-bs-movie');
+        for (let i = 0; i < favoriteMovie.length; i++) {
+            if (movieId === favoriteMovie[i].id) {
+                return true
+            }
+        }
+        return false;
+    }
+
+
+    function getMovieById(movieId) {
+        for (let i = 0; i < movies.length; i++) {
+            if (movies[i].id === parseInt(movieId)) {
+                return movies[i]
+            }
+        }
+    }
+
+    $(".dropdown-item").click(displayMoviesByGenre);
 }
-
-
-//
-//avem nevoie de o functie care sa actualizeze informatiile din modal fiecarui film
-//trebuie sa transmitem informatiile despre film din butonul care deschide modalul
-
 
