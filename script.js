@@ -5,20 +5,12 @@ function loadMovieData(data) {
     let movies = data.movies;
     let genres = data.genres;
     displayMovies(movies)
+    $("#all-movies").click(displayMovies(movies));
     displayAGenresInDropdown()
     $("#movieModal").on("show.bs.modal", updateMovieModal)
     $("#search-button").click(searchMovie)
-    let favoriteMovie = [];
+    $(".dropdown-item").click(displayMoviesByGenre);
 
-    function displayAGenresInDropdown() {
-        for (let i = 0; i < genres.length; i++) {
-            let a = $('<a class="dropdown-item"  href="#" ></a>').text(genres[i].name)
-            a.attr("data-genre", genres[i].id)
-            let li = $('<li></li>')
-            li.append(a)
-            $(".dropdown-menu").append(li)
-        }
-    }
 
     function displayMovies(movies) {
         for (let i = 0; i < movies.length; i++) {
@@ -36,21 +28,24 @@ function loadMovieData(data) {
         $("#movies-div").append(div)
     }
 
+    function displayAGenresInDropdown() {
+        for (let i = 0; i < genres.length; i++) {
+            let a = $('<a class="dropdown-item"  href="#" ></a>').text(genres[i].name)
+            a.attr("data-genre", genres[i].id)
+            let li = $('<li></li>')
+            li.append(a)
+            $(".dropdown-menu").append(li)
+        }
+    }
+
     function updateMovieModal(event) {
-        const movieButton = event.relatedTarget //butonul pe care am apasat sa se deschida modalul = butonul filmului
-        const movieId = movieButton.getAttribute('data-bs-movie'); //luam valoarea atriobutului data-bs-movie = avem id-ul filmului
+        const movieButton = event.relatedTarget
+        const movieId = movieButton.getAttribute('data-bs-movie');
         let movie = getMovieById(movieId);
-        // $("#movie-title-h1").text(movie.title)
-        $("#release-span").text(movie.release_date)
+        $("#movie-title-h1").text(movie.title)
         $("#description").text(movie.overview)
         $("#rating-span").text(movie.vote_average)
         $("#bookmark-button").attr('data-bs-movie', movieId)
-        //daca filmul este favorti (Adica se afla in array-ul de favorite) se afiseaza burtonul plin altfel butonul gol
-        if (isFavorite(movie)) {
-            $("#bookmark-button i").addClass("bi-bookmark-fill")
-        } else {
-            $("#bookmark-button i").addClass("bi-bookmark")
-        }
         $("#img-id").attr('src', movie.poster_path)
     }
 
@@ -67,6 +62,14 @@ function loadMovieData(data) {
         }
     }
 
+    function getMovieById(movieId) {
+        for (let i = 0; i < movies.length; i++) {
+            if (movies[i].id === parseInt(movieId)) {
+                return movies[i]
+            }
+        }
+    }
+
     function searchMovie(event) {
         event.preventDefault()
         $("#movies-div").empty()
@@ -79,50 +82,5 @@ function loadMovieData(data) {
     }
 
 
-    $("#bookmark-button").click(markFavorite);
-
-    // $("#bookmark-button").click(markNonFavorite);
-    let movieIsFavorite = false;
-
-    function markFavorite() {
-        //1. extragemn id-ul filmului pe care s-a apasat butnolu de bookmark din modal
-        let movieId = $("#bookmark-button").attr('data-bs-movie');
-        //2. gasim filmul dupa id
-        let movie = getMovieById(movieId);
-        //3. adaugam filmul la favorite
-        $("#bookmark-button i").addClass("bi-bookmark")
-        $("#bookmark-button i").removeClassz("bi-bookmark-fill")
-        favoriteMovie.push(movie);
-    }
-
-    function displayFavoriteMovies() {
-        for (let i = 0; i < movies.length; i++) {
-            markFavorite(movies[i])
-        }
-    }
-
-    $("#favorite-movies").click(markFavorite)
-    $(".moviesss").click(displayMovies)
-
-    function isFavorite() {
-        let movieId = $("#bookmark-button").attr('data-bs-movie');
-        for (let i = 0; i < favoriteMovie.length; i++) {
-            if (movieId === favoriteMovie[i].id) {
-                return true
-            }
-        }
-        return false;
-    }
-
-
-    function getMovieById(movieId) {
-        for (let i = 0; i < movies.length; i++) {
-            if (movies[i].id === parseInt(movieId)) {
-                return movies[i]
-            }
-        }
-    }
-
-    $(".dropdown-item").click(displayMoviesByGenre);
 }
 

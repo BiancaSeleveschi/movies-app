@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All movies</a>
+                        <a class="nav-link" id="all-movies" href="#">All movies</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -30,9 +30,6 @@
                         </a>
                         <ul class="dropdown-menu">
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a id="favorite-movies" class="nav-link " aria-current="page" href="#" role="button">Favorite movies</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -47,30 +44,29 @@
 <main>
     <div class="container">
         <div class="modal fade " id="movieModal" tabindex="-1" aria-labelledby="movieModal" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content  ">
+                    <div class="modal-header header-footer">
                         <h1 class="modal-title fs-5" id="movie-title-h1">Modal title</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body row">
+                    <div class="modal-body row ">
                         <div class="col-6">
                             <img class="img-fluid rounded shadow mx-auto d-block" id="img-id"
                                  src="https://image.tmdb.org/t/p/w300/bSqpOGzaKBdGkBLmcm1JJIVryYy.jpg">
                         </div>
                         <div class="col-6">
-                            <a href="www.google.com">Play trailer</a>
-                            <p class="mt-5"><span class="mt-5 fw-bold">Release Date:</span><span id="release-span">2022-07-27</span>
+                            <p class="mt-5"><span class="mt-5 fw-bold">Release Date: </span><span id="release-span">2022-07-27</span>
                             </p>
-                            <p id="description">After escaping from an Estonian psychiatric facility, Leena Klammer
+                            <p id="description" class="p-4 border rounded-2 text-light"> After escaping from an
+                                Estonian psychiatric facility, Leena Klammer
                                 travels to America by impersonating Esther, the missing daughter of a wealthy family.
                                 But when her mask starts to slip, she is put against a mother who will protect her
                                 family from the murderous “child” at any cost.</p>
                             <p><span class="fw-bold">Rating: </span> <span id="rating-span">.9/10</span></p>
-                            <button id = "bookmark-button"> <i class="bi" style="font-size: 1.5rem; color: cornflowerblue;"></i></button>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer header-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -80,8 +76,7 @@
         </div>
     </div>
 </main>
-<footer class="bg-dark text-light text-center p-1">
-    <p>This website is made by Bianca</p>
+<footer>
 </footer>
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
