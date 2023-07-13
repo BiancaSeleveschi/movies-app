@@ -32,6 +32,6 @@ alt="bootstrap" width="40" height="40"/> </a>  <a href="https://git-scm.com/" ta
 https://movies-app11.netlify.app/
 
 ### UI
-<img src="src/assets/movie-img.jpg" alt="MovieApp" />
-<img src="src/assets/movie-modal.jpg" alt="MovieApp" />
+<img src="src/assets/movie-img.jpg" alt="MovieApp" width="110" />
+<img src="src/assets/movie-modal.jpg" alt="MovieApp" width="110"/>
 
