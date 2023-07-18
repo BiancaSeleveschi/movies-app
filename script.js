@@ -5,14 +5,14 @@ function loadMovieData(data) {
     let movies = data.movies;
     let genres = data.genres;
     displayMovies(movies)
-    $("#all-movies").click(displayMovies(movies));
     displayAGenresInDropdown()
     $("#movieModal").on("show.bs.modal", updateMovieModal)
+    $("#all-movies").click(() => displayMovies(movies));
     $("#search-button").click(searchMovie)
     $(".dropdown-item").click(displayMoviesByGenre);
 
-
     function displayMovies(movies) {
+        $("#movies-div").html("");
         for (let i = 0; i < movies.length; i++) {
             insertMovie(movies[i])
         }
@@ -27,6 +27,7 @@ function loadMovieData(data) {
         div.append(button)
         $("#movies-div").append(div)
     }
+
 
     function displayAGenresInDropdown() {
         for (let i = 0; i < genres.length; i++) {
