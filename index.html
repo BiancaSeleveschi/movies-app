@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
-<body>
+<body class="bg-primary">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="cursor-div">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="cursor-div">
         <div class="container-fluid">
             <h4 class="me-2 text-light">MoviesApp</h4>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
@@ -42,28 +42,28 @@
     </nav>
 </header>
 <main>
-    <div class="container mt-5">
-        <div class="modal fade " id="movieModal" tabindex="-1" aria-labelledby="movieModal" aria-hidden="true">
-            <div class="modal-dialog modal-lg ">
-                <div class="modal-content  ">
+    <div class="container pt-5">
+        <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content bg-secondary ">
                     <div class="modal-header header-footer">
-                        <h1 class="modal-title fs-5" id="movie-title-h1">Modal title</h1>
+                        <h1 class="modal-title fs-5 text-light" id="movie-title-h1">Modal title</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body row ">
-                        <div class="col-6">
+                    <div class="modal-body row">
+                        <div class="col-11 col-sm-12 col-md-6 col-lg-6 col-xl-6 img-div">
                             <img class="img-fluid rounded shadow mx-auto d-block" id="img-id"
                                  src="https://image.tmdb.org/t/p/w300/bSqpOGzaKBdGkBLmcm1JJIVryYy.jpg">
                         </div>
-                        <div class="col-6">
-                            <p class="mt-5"><span class="mt-5 fw-bold">Release Date: </span><span id="release-span">2022-07-27</span>
+                        <div class="col-11 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                            <p><span class="  fw-bold">Release Date: </span><span id="release-span">2022-07-27</span>
                             </p>
-                            <p id="description" class="p-4 border rounded-2 text-light"> After escaping from an
+                            <p id="description" class="col-12 p-4 border rounded-2 text-light"> After escaping from an
                                 Estonian psychiatric faclity, Leena Klammer
                                 travels to America by impersonating Esther, the missing daughter of a wealthy family.
                                 But when her mask starts to slip, she is put against a mother who will protect her
                                 family from the murderous “child” at any cost.</p>
-                            <p><span class="fw-bold">Rating: </span> <span id="rating-span">.9/10</span></p>i
+                            <p><span class="fw-bold">Rating: </span> <span id="rating-span">.9/10</span></p>
                         </div>
                     </div>
                     <div class="modal-footer header-footer">
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-between my-2" id="movies-div">
+        <div class="row justify-content-lg-between justify-content-xl-between my-2 mx-2" id="movies-div">
         </div>
     </div>
 </main>
