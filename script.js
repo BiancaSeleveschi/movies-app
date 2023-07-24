@@ -19,7 +19,7 @@ function loadMovieData(data) {
     }
 
     function insertMovie(movie) {
-        let div = $("<div class='movie-div col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 my-2'></div>")
+        let div = $("<div class='movie-div col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 my-2'></div>")
         let button = $(`<button class='btn' type='button' data-bs-toggle='modal' data-bs-target='#movieModal' data-bs-movie='${movie.id}'> </button>`)
         let img = $("<img class='img-fluid rounded shadow'>")
         img.attr("src", movie.poster_path)
